@@ -1,5 +1,5 @@
 "use client"
-import { Bell, Menu, Sun } from "lucide-react";
+import { Bell, Menu, Settings, Sun } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -13,7 +13,7 @@ const Navbar = () => {
       onClick={() => {}}>
         <Menu className="w-5 h-5" />
      </button>
-     </div>
+     
     <div className="relative">
         <input type="search" placeholder="search" 
         className="pl-10 pr-4 py-2 w-50 md:w-80 border-2 
@@ -24,6 +24,7 @@ const Navbar = () => {
           pointer-events-none">
             <Bell className="text-gray-500 size={20}" />
          </div>
+        </div>
         </div>
         {/* RIGHT SIDE */}
         <div className="flex justify-between items-center gap-5">
@@ -46,6 +47,7 @@ const Navbar = () => {
                 </div>
             </div>
             <Link  href="/settings" />
+            <Settings className="cursor-pointer text-gray-500" size={23} />
         </div>
     </div>
     )
