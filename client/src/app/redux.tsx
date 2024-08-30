@@ -1,4 +1,4 @@
-import { useRef } from "react";
+'use client'
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
   TypedUseSelectorHook,
@@ -7,7 +7,7 @@ import {
   Provider,
 } from "react-redux";
 import globalReducer from './state'
-//import { api } from "@/state/api";
+import { api } from "./state/api";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 import {
@@ -22,6 +22,7 @@ import {
 } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
+import { useRef } from "react";
 
 /* REDUX PERSISTENCE */
 const createNoopStorage = () => {
