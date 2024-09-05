@@ -2,7 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/app/state";
-import { Layout, LucideIcon, Menu } from "lucide-react";
+import { Archive, CircleDollarSign, Clipboard, Layout, LucideIcon, Menu, SlidersHorizontal, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -26,8 +26,9 @@ const SidebarLink = ({
     <Link href={href}>
       <div className={`cursor-pointer flex items-center ${
         isCollapsed ? "justify-center py-4" : "justify-start px-8 py-4"
-      } hover:text-blue-500 hover:bg-blue-100 gap-3 transition-colors ${
-        isActive ? "bg-blue-500 text-white" : ""}
+      } 
+      hover:text-blue-500 hover:bg-blue-100 gap-3 transition-colors ${
+        isActive ? "bg-blue-200 text-white" : ""}
       }`}
       >
 
@@ -71,7 +72,33 @@ const Sidebar = () => {
     </div>
 {/* links */}
     <div className="flex-grow mt-8">
-      <SidebarLink href="/dashboard" icon={Layout} label="Dashboard" isCollapsed={isSidebarCollapsed}      
+      <SidebarLink href="/dashboard" 
+      icon={Layout} label="Dashboard"
+       isCollapsed={isSidebarCollapsed}      
+      />
+          <SidebarLink href="/inventory" 
+      icon={Archive} label="Inventory"
+       isCollapsed={isSidebarCollapsed}      
+      />
+          <SidebarLink href="/clipboard" 
+      icon={Clipboard} label="Clipboard"
+       isCollapsed={isSidebarCollapsed}      
+      />
+          <SidebarLink href="/products" 
+       icon={Clipboard} label="Products"
+       isCollapsed={isSidebarCollapsed}      
+      />
+          <SidebarLink href="/users" 
+      icon={Users} label="Users"
+       isCollapsed={isSidebarCollapsed}      
+      />
+            <SidebarLink href="/settings" 
+      icon={SlidersHorizontal} label="Settings"
+       isCollapsed={isSidebarCollapsed}      
+      />
+            <SidebarLink href="/expenses" 
+      icon={CircleDollarSign} label="Expenses"
+       isCollapsed={isSidebarCollapsed}      
       />
     </div>
 
