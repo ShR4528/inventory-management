@@ -12,7 +12,7 @@ const Navbar = () => {
   
     const toggleSidebar = () => {
       dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
-      console.log(toggleSidebar, 'toggleSidebar')
+  
     }
   
 
