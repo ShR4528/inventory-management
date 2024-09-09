@@ -52,8 +52,7 @@ const Sidebar = () => {
 
   const sidebarClassNames = `fixed flex flex-col 
   ${isSidebarCollapsed ? "w-0 md:w-16" : "w-72 md:w-64" }
-  bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40
-  `
+  bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40`
 
   return(
 <div className={sidebarClassNames}>
@@ -71,6 +70,8 @@ const Sidebar = () => {
     </button>
     </div>
 {/* links */}
+
+
     <div className="flex-grow mt-8">
       <SidebarLink href="/dashboard" 
       icon={Layout} label="Dashboard"
