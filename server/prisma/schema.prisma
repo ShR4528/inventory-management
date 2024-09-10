@@ -30,7 +30,7 @@ model Products {
 }
 
 model Sales {
-  salesId     String   @id
+  saleId      String   @id
   productId   String
   timestamp   DateTime
   quantity    Int
@@ -63,11 +63,11 @@ model SalesSummary {
   date             DateTime
 }
 
-model PurchasesSummary {
-  salesSummaryId   String   @id
-  totalExpenses    Float
-  changePercentage Float?
-  date             DateTime
+model PurchaseSummary {
+  purchaseSummaryId String   @id
+  totalPurchased    Float
+  changePercentage  Float?
+  date              DateTime
 }
 
 model ExpenseSummary {
