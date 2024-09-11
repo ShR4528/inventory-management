@@ -5,7 +5,7 @@ import helmet, { crossOriginResourcePolicy } from "helmet"
 import cors from "cors"
 import morgan from "morgan"
 //Route imports 
-
+import dashboardRoutes from "./routes/dashboardRoutes"
 //Configuratiom
 
 dotenv.config()
@@ -19,9 +19,7 @@ app.use(morgan("common"))
 app.use(cors())
 
 // ROUTES//
-app.get("/hello", (req, res) =>{
-    res.send("HELLO WORLD")
-})
+app.use("/dashboard", dashboardRoutes)
 
 
 
