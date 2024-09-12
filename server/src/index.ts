@@ -6,6 +6,7 @@ import cors from "cors"
 import morgan from "morgan"
 //Route imports 
 import dashboardRoutes from "./routes/dashboardRoutes"
+import productRoutes from "./routes/productRoutes"
 //Configuratiom
 
 dotenv.config()
@@ -20,6 +21,8 @@ app.use(cors())
 
 // ROUTES//
 app.use("/dashboard", dashboardRoutes)
+app.use("/products", productRoutes)
+
 
 
 
