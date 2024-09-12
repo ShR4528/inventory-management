@@ -11,7 +11,7 @@ type StatDetails = {
 type StatCardProps = { 
     title: string; 
     primaryIcon:JSX.Element;
-    dataRange: string;
+    dateRange: string;
     details: StatDetails[];
 }
 
@@ -20,7 +20,7 @@ const StatCard = ({
     title,
     primaryIcon,
     details,
-    dataRange
+    dateRange
 }: StatCardProps) => { 
     const formatPercantage = (value: number) =>{
         const signal = value >= 0 ? '+' : '';
@@ -35,7 +35,7 @@ const StatCard = ({
         <div>
      <div className="flex justify-between items-center mb-2 px-5 pt-4">
         <h2 className="font-semibold text-lg text-gray-700">{title}</h2>
-        <p className="text-sm text-gray-500">{dataRange}</p>
+        <p className="text-sm text-gray-500">{dateRange}</p>
         </div>
         <hr />
     </div>
@@ -47,7 +47,7 @@ const StatCard = ({
         <div className="flex-1">
             {details.map((detail, index) =>(
                   <React.Fragment key={index}>
-                  <div className="flex items-center justify between my-4">
+                  <div className="flex items-center justify-between my-4">
                       <span className="text-gray-500">{detail.title}</span>
                       <span className="font-bold text-gray-800">{detail.amount}</span>
                       <div className="flex items-center">
@@ -57,6 +57,7 @@ const StatCard = ({
                     </span>
                       </div>
                   </div>
+                  {index < details.length - 1 && <hr />}
               </React.Fragment>
             ))}
         </div>
