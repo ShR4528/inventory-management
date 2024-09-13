@@ -21,6 +21,7 @@ const Users = () => {
 
   return (
     <div className="flex flex-col">
+        {/* todo: change color */}
         <Header name="Users" />
         <DataGrid
         rows={users}
