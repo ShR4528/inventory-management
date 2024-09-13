@@ -22,11 +22,11 @@ const Products = () => {
 
     const { data: products, isLoading, isError } = useGetProductsQuery(searchTerm);
 
+
     const [createProduct] = useCreateProductMutation();
     const handleCreateProduct = async (productData: ProductFormData) => {
-        await createProduct(productData);
-        
-    }
+      await createProduct(productData);
+    };
 
     if (isLoading) {
         return <div className="py-4">Loading...</div>;

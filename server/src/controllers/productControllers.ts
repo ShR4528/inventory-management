@@ -22,7 +22,7 @@ Promise<void> => {
 }
 export const createProduct = async (req: Request, res: Response): 
 Promise<void> => {
-    const {name, price, rating, stockQuantity} = req.body
+   
     try {
         const {productId, name, price, rating, stockQuantity} = req.body;
         const product = await prisma.products.create({
