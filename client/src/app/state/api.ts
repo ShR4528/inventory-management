@@ -1,6 +1,4 @@
-import createPalette from "@mui/material/styles/createPalette";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { create } from "domain";
 
 export interface Product {
    productId: string;
@@ -70,12 +68,12 @@ export const api = createApi({
         }),
         createProduct: build.mutation<Product, NewProduct>({
             query: (newProduct) => ({
-                url: "/products",
-                method: "POST",
-                body: newProduct,
+              url: "/products",
+              method: "POST",
+              body: newProduct,
             }),
-           invalidatesTags: ["Products"],
-        }),
+            invalidatesTags: ["Products"],
+          }),
     })
 })
 

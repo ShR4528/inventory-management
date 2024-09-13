@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { v4 } from 'uuid';
 import Header from '../(components)/Header';
 
@@ -8,6 +8,7 @@ type ProductFormData = {
     rating: number;
     stockQuantity: number;
 }
+
 
 type CreateProductModalProps = {
     isOpen: boolean;
@@ -19,14 +20,14 @@ const CreateProductModal = ({ isOpen, onClose, onCreate }
     : CreateProductModalProps) => {
 
     const [formData, setFormData] = useState({
-        productId: v4,
+        productId: v4(),
         name: '',
         price: 0,
         stockQuantity: 0,
         rating: 0
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
@@ -45,8 +46,8 @@ const CreateProductModal = ({ isOpen, onClose, onCreate }
         onCreate(formData);
         onClose();
     }
-    const labelCssStyle = "block text-sm font-medium text-gray-700";
-    const inputCssStyle = "block w-full mb-2 p-2 border-gray-500 border-2 rounded-md";
+    const labelCssStyle = "block text-sm font-medium text-gray-700 dark:text-gray-300";
+    const inputCssStyle = "block w-full mb-2 p-2 border-gray-500 border-2 rounded-md dark:bg-gray-800 dark:text-white";
 
 
 
@@ -70,9 +71,10 @@ const CreateProductModal = ({ isOpen, onClose, onCreate }
                     <label htmlFor="productPrice" className={labelCssStyle}>
                         Price
                     </label>
-                    <input type="text"
-                        name='price'
-                        placeholder='Price'
+                    <input
+                        type="number"
+                        name="price"
+                        placeholder="Price"
                         onChange={handleChange}
                         value={formData.price}
                         className={inputCssStyle}
