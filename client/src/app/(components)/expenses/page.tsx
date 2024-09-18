@@ -1,9 +1,10 @@
 'use client'
 
-import { useGetExpensesByCategoryQuery.ExpenseByCategorySummary } from '@/app/state/api'
+import { useGetExpensesByCategoryQuery,
+    ExpenseByCategorySummary } from '@/app/state/api'
 import React, { useMemo, useState } from 'react'
 import Header from '../Header'
-import { Pie, PieChart, ResponsiveContainer } from 'recharts'
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 
 type AggregatedDataItem = {
     name: string;
@@ -14,10 +15,6 @@ type AggregatedDataItem = {
   type AggregatedData = {
     [category: string]: AggregatedDataItem;
   };
-
-
-
-
 
 const Expenses = () => {
     const [activeIndex, setActiveIndex] = useState(0)
@@ -41,7 +38,7 @@ const Expenses = () => {
         return date.toISOString().split('T')[0]
     }
 
-
+    
     const aggregatedData: AggregatedDataItem[] = useMemo(() => {
         const filtered: AggregatedData = expenses
           .filter((data: ExpenseByCategorySummary) => {
@@ -74,9 +71,7 @@ const Expenses = () => {
 
   return (
     <div>
-
-   
-    {/*  HEADER */}
+     {/*  HEADER */}
     <div className='mb-5'>
         <Header name='Expenses'  />
         <p className='text-sm text-gray-500'>
@@ -143,15 +138,23 @@ const Expenses = () => {
     <ResponsiveContainer width="100%" height={400}>
     <PieChart>
         <Pie
-         //data={''}
+         data={aggregatedData}
          cx="50%"
          cy="50%"
          label
          outerRadius={150}
          fill="#8884d8"
          dataKey="amount"
-         onMouseEnter={(_, index) => setActiveIndex(index)}>
+         onMouseEnter={(_, index) => setActiveIndex(index)}
+         >
+            {aggregatedData.map(
+                (entry: AggregatedDataItem, index: number) => (
+                    <Cell 
+                    key={`cell-${index}`} fill={entry.color}/>
+                ))}
         </Pie>
+        <Tooltip />
+        <Legend />
     </PieChart>
     </ResponsiveContainer>
     </div>
