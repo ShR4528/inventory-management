@@ -54,11 +54,36 @@ const Expenses = () => {
                 >
                     <option>All</option>
                     <option>Office</option>
-                    <option></option>
-                    <option></option>
+                    <option>Professional</option>
+                    <option>Salaries</option>
                 </select>
             </div>
 
+            {/* START  DATE */}
+            <div>
+                <label htmlFor="start-date" className='block text-sm font-medium text-gray-700'>
+                    Start Date
+                </label>
+                <input 
+                type='date'
+                id='start-date'
+                name='start-date'
+                className='mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'
+                onChange={(e)=> setStartDate(e.target.value)}
+                />
+            </div>
+            {/* END DATE */}
+            <div>
+                <label htmlFor="end-date" className='block text-sm font-medium text-gray-700'>
+                    End Date
+                </label>
+                <input 
+                type='date'
+                id='end-date'
+                name='end-date'
+                className='mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'
+                />
+            </div>
         </div>
 
         </div>
