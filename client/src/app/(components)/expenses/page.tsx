@@ -1,8 +1,22 @@
 'use client'
 
-import { useGetExpensesByCategoryQuery } from '@/app/state/api'
+import { useGetExpensesByCategoryQuery.ExpenseByCategorySummary } from '@/app/state/api'
 import React, { useMemo, useState } from 'react'
 import Header from '../Header'
+import { Pie, PieChart, ResponsiveContainer } from 'recharts'
+
+type AggregatedDataItem = {
+    name: string;
+    color?: string;
+    amount: number;
+  };
+  
+  type AggregatedData = {
+    [category: string]: AggregatedDataItem;
+  };
+
+
+
 
 
 const Expenses = () => {
@@ -20,6 +34,43 @@ const Expenses = () => {
     if(isLoading) return <div className="py-4">Loading...</div>
 
     if(isError || !expensesData) return <div className="text-center text-red-500">Failed to fetch expenses</div>
+
+
+    const parseDate = (dateString: string) =>{
+        const date = new Date(dateString)
+        return date.toISOString().split('T')[0]
+    }
+
+
+    const aggregatedData: AggregatedDataItem[] = useMemo(() => {
+        const filtered: AggregatedData = expenses
+          .filter((data: ExpenseByCategorySummary) => {
+            const matchesCategory =
+              selectedCategory === "All" || data.category === selectedCategory;
+            const dataDate = parseDate(data.date);
+            const matchesDate =
+              !startDate ||
+              !endDate ||
+              (dataDate >= startDate && dataDate <= endDate);
+            return matchesCategory && matchesDate;
+          })
+          .reduce((acc: AggregatedData, data: ExpenseByCategorySummary) => {
+            const amount = parseInt(data.amount);
+            if (!acc[data.category]) {
+              acc[data.category] = { name: data.category, amount: 0 };
+              acc[data.category].color = `#${Math.floor(
+                Math.random() * 16777215
+              ).toString(16)}`;
+              acc[data.category].amount += amount;
+            }
+            return acc;
+          }, {});
+    
+        return Object.values(filtered);
+      }, [expenses, selectedCategory, startDate, endDate]);
+
+    
+  
 
   return (
     <div>
@@ -82,11 +133,28 @@ const Expenses = () => {
                 id='end-date'
                 name='end-date'
                 className='mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'
+                onChange={(e) => setEndDate(e.target.value)}
                 />
             </div>
         </div>
-
-        </div>
+    </div>
+    {/* PIE CHART */}
+    <div className='flex-grow bg-white shadow rounded-lg p-4 md:p-6'>
+    <ResponsiveContainer width="100%" height={400}>
+    <PieChart>
+        <Pie
+         //data={''}
+         cx="50%"
+         cy="50%"
+         label
+         outerRadius={150}
+         fill="#8884d8"
+         dataKey="amount"
+         onMouseEnter={(_, index) => setActiveIndex(index)}>
+        </Pie>
+    </PieChart>
+    </ResponsiveContainer>
+    </div>
     </div>
 </div>
   )
