@@ -1,5 +1,6 @@
 'use client'
 
+
 import { useGetExpensesByCategoryQuery,
     ExpenseByCategorySummary } from '@/app/state/api'
 import React, { useMemo, useState } from 'react'
@@ -11,7 +12,7 @@ type AggregatedDataItem = {
     color?: string;
     amount: number;
   };
-  
+
   type AggregatedData = {
     [category: string]: AggregatedDataItem;
   };
@@ -27,10 +28,6 @@ const Expenses = () => {
     const expenses = useMemo(() => expensesData ?? [], [expensesData])
 
 
-    
-    if(isLoading) return <div className="py-4">Loading...</div>
-
-    if(isError || !expensesData) return <div className="text-center text-red-500">Failed to fetch expenses</div>
 
 
     const parseDate = (dateString: string) =>{
@@ -62,15 +59,26 @@ const Expenses = () => {
             }
             return acc;
           }, {});
-    
+
         return Object.values(filtered);
       }, [expenses, selectedCategory, startDate, endDate]);
 
-    
-  
+
+      const classNames = {
+        label: "block text-sm font-medium text-gray-700",
+        selectInput:
+          "mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md",
+      };
+
+      
+    if(isLoading) return <div className="py-4">Loading...</div>
+
+    if(isError || !expensesData) return <div className="text-center text-red-500">Failed to fetch expenses</div>
 
   return (
     <div>
+   
+    {/*  HEADER */}
      {/*  HEADER */}
     <div className='mb-5'>
         <Header name='Expenses'  />
@@ -114,7 +122,7 @@ const Expenses = () => {
                 type='date'
                 id='start-date'
                 name='start-date'
-                className='mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'
+                className={classNames.selectInput}
                 onChange={(e)=> setStartDate(e.target.value)}
                 />
             </div>
@@ -127,7 +135,7 @@ const Expenses = () => {
                 type='date'
                 id='end-date'
                 name='end-date'
-                className='mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md'
+                className={classNames.selectInput}
                 onChange={(e) => setEndDate(e.target.value)}
                 />
             </div>
@@ -145,12 +153,15 @@ const Expenses = () => {
          outerRadius={150}
          fill="#8884d8"
          dataKey="amount"
-         onMouseEnter={(_, index) => setActiveIndex(index)}
-         >
+         onMouseEnter={(_, index) => setActiveIndex(index)}>
             {aggregatedData.map(
                 (entry: AggregatedDataItem, index: number) => (
                     <Cell 
-                    key={`cell-${index}`} fill={entry.color}/>
+                    key={`cell-${index}`}
+                     fill={
+                        index === activeIndex ? "rgd(29, 78, 216)" : entry.color
+                     }
+                     />
                 ))}
         </Pie>
         <Tooltip />
@@ -162,5 +173,4 @@ const Expenses = () => {
 </div>
   )
 }
-
-export default Expenses
+export default Expenses;
